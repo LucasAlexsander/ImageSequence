@@ -1,33 +1,31 @@
 const html = document.documentElement;
-const canvas = document.getElementById('hero-lightpass');
-const context = canvas.getContext('2d');
+const img = document.getElementById('hero-lightpass');
 const backgroundAnimation = document.querySelector('.background-animation');
 
 const textosBackgorundAux =
   document.querySelector('#background-texts').children;
 const textosBackgorund = Array.from(textosBackgorundAux);
 
+const maxImage = 330;
 const frameCount = 660;
 const currentFrame = (index) => `midia/BackgroundFrame_${index.toString()}.jpg`;
 
 const preloadImages = () => {
-  for (let i = 1; i < frameCount; i++) {
-    const img = new Image();
+  for (let i = 1; i < maxImage; i++) {
     img.src = currentFrame(i);
   }
 };
 
-const img = new Image();
 img.src = currentFrame(1);
-canvas.width = 1158;
-canvas.height = 770;
 img.onload = function () {
   context.drawImage(img, 0, 0);
 };
 
 const updateImage = (index) => {
-  img.src = currentFrame(index);
-  context.drawImage(img, 0, 0);
+  if (index <= maxImage) {
+    img.src = currentFrame(index);
+    context.drawImage(img, 0, 0);
+  }
 };
 
 // Altura máxima

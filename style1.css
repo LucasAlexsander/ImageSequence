@@ -20,6 +20,7 @@ section {
   min-height: 100vh;
   height: 100%;
   background-color: #446ABB;
+  /* background-color: #000; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,8 +36,8 @@ section {
   justify-content: space-between;
   flex-direction: column;
   gap: 50vh;
-  padding: 0 0 25vh 0;
-  transform: translateY(-10vh);
+  padding: 25vh 0 0 0;
+  transform: translateY(-100vh);
   font-size: 1.31rem;
   font-family: 'Raleway', sans-serif;
   color: #fff;
@@ -58,34 +59,24 @@ section {
   word-spacing: 1px;
 }
 
-#backgroudVideo {
-  padding: 60px 0 0 0;
-  position: -webkit-sticky;
-  position: sticky;
-  top: -60px;
-  align-self: start;
-  width: 50%;
-  height: 50vh;
-  margin: 0 auto;
-}
-
-.area-background {
-  position: relative;
+.intro {
   padding-top: 120px;
   position: -webkit-sticky;
   position: sticky;
   top: -60px;
-  align-items: center;
   width: 100%;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-canvas {
-  width: 500px;
-  object-fit: contain;
+img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  margin: 0 auto;
+  user-select: none;
 }
+
 
 
 #end-background-animation {
