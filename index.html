@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <section>
+    <h1>Olá mundo</h1>
+  </section>
+
+  <div id="start-background-animation" class="background-animation">
+    <!-- <div id="backgroudVideo">
+      <canvas id="hero-ligthpass"></canvas>
+    </div> -->
+    <canvas id="hero-lightpass"> </canvas>
+
+    <div id="background-texts" class="background-texts">
+      <h3 id="title-backgrund">Saúde no mais alto nível</h3>
+      <p>Fórmula <strong><i>completa</i></strong> com as principais carências de vitaminas e minerais entre os <strong>Brasileiros</strong>.</p>
+      <p>Tecnologia <strong><i>inovadora</i></strong> – livres de corantes artificiais e glúten.</p>
+      <p>Aprovado em todos os testes da Anvisa.</p>
+    </div>
+
+    <div id="end-background-animation"></div>
+
+  </div>
+
+  <script>
+    const html = document.documentElement;
+    const canvas = document.getElementById('hero-lightpass');
+    const context = canvas.getContext('2d');
+    const backgroundAnimation = document.querySelector('.background-animation');
+
+    const textosBackgorund =
+      document.querySelectorAll('#background-texts p');
+
+    const frameCount = 1200;
+    const maxImage = 330;
+    const currentFrame = (index) =>
+      `midia/backgroundFrame_${index
+        .toString()}.jpg`;
+
+    const preloadImages = () => {
+      for (let i = 1; i < maxImage; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+      }
+    };
+
+    const img = new Image();
+    img.src = currentFrame(1);
+    canvas.width = 1158;
+    canvas.height = 780;
+    img.onload = function () {
+      context.drawImage(img, 0, 0);
+    };
+
+    const updateImage = (index) => {
+      if (index <= maxImage) {
+        img.src = currentFrame(index);
+        context.drawImage(img, 0, 0);
+      }
+    };
+
+    // Altura máxima
+    console.log(backgroundAnimation.clientHeight);
+
+    window.addEventListener('scroll', () => {
+      const elementoTop = backgroundAnimation.getBoundingClientRect().top;
+      const elementoBottom = backgroundAnimation.getBoundingClientRect().bottom;
+      const maxScrollTop = html.scrollHeight - window.innerHeight;
+      const scrollFraction = elementoTop / (maxScrollTop * 2);
+
+      if (elementoTop <= 0 && elementoBottom >= 0) {
+        const frameIndex = Math.min(
+          frameCount - 1,
+          Math.ceil(scrollFraction * frameCount),
+        );
+
+        console.log("frameIndex: " + (frameIndex))
+        requestAnimationFrame(() => updateImage(frameIndex * -1 + 1));
+
+        textosBackgorund.forEach((texto, index) => {
+          if (
+            texto.getBoundingClientRect().top <= 550 &&
+            texto.getBoundingClientRect().top >= -10
+          ) {
+            // texto.classList.add('visible');
+            let number = (texto.getBoundingClientRect().top - 550) * -0.001;
+            texto.style.opacity = number;
+          } else {
+            texto.classList.remove('visible');
+          }
+        });
+      }
+    });
+
+    preloadImages();
+
+  </script>
+
+  <section>
+    <h1>Olá mundo</h1>
+  </section>
+  <hr>
+  <section>
+    <h1>Olá mundo</h1>
+  </section>
+
+
+  <!-- <script src="script.js"></script> -->
+</body>
+
+</html>
